@@ -1,0 +1,32 @@
+{
+  "name": "sass-dev",
+  "version": "1.0.8",
+  "description": "Using esbuild to dynamically convert sass  ",
+  "type": "module",
+  "bin": {
+    "sass-dev": "./index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lv-saharan/sass-dev.git"
+  },
+  "keywords": [
+    "sass",
+    "esbuild",
+    "css",
+    "helper"
+  ],
+  "author": "lv-saharan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lv-saharan/sass-dev/issues"
+  },
+  "homepage": "https://github.com/lv-saharan/sass-dev#readme",
+  "dependencies": {
+    "esbuild": "^0.18.17",
+    "esbuild-sass-plugin": "^2.10.0"
+  }
+}
