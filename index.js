@@ -36,12 +36,24 @@ function rebuild() {
       outbase: dir,
       outdir: path.resolve(dir),
       entryNames: "[dir]/[name]",
+      external: [
+        "*.jpg",
+        "*.png",
+        "*.gif",
+        "*.bmp",
+        "*.ico",
+        "*.svg",
+        "*.woff",
+        "*.woff2",
+        "*.ttf",
+        "*.ttl",
+        "*.webp",
+      ],
       plugins: [sassPlugin({})],
     });
-    try{
-
+    try {
       await ctx.rebuild();
-    }catch(exc){
+    } catch (exc) {
       //build error
     }
     console.log(`Build  ${dir} OK ！`);
