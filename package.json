@@ -1,6 +1,6 @@
 {
   "name": "sass-dev",
-  "version": "1.0.10",
+  "version": "1.0.12",
   "description": "Using esbuild to dynamically convert sass  ",
   "type": "module",
   "bin": {

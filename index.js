@@ -11,18 +11,25 @@ if (entryRoots.length == 0) {
 }
 
 const findEntryPoints = (dirPath) => {
-  const dirStat = fs.statSync(dirPath);
   const files = [];
-  if (dirStat.isDirectory()) {
-    fs.readdirSync(dirPath).forEach((file) => {
-      const filePath = path.join(dirPath, file);
-      files.push(...findEntryPoints(filePath));
-    });
-  } else {
-    if (path.extname(dirPath) == ".scss") {
-      files.push(dirPath);
+  if (fs.existsSync(dirPath)) {
+    try {
+      const dirStat = fs.statSync(dirPath);
+      if (dirStat.isDirectory()) {
+        fs.readdirSync(dirPath).forEach((file) => {
+          const filePath = path.join(dirPath, file);
+          files.push(...findEntryPoints(filePath));
+        });
+      } else {
+        if (path.extname(dirPath) == ".scss") {
+          files.push(dirPath);
+        }
+      }
+    } catch (exc) {
+      console.warn("finding files error",exc)
     }
   }
+
   return files;
 };
 
@@ -73,11 +80,18 @@ const watcher = new Watcher(
     depth: 20,
     renameDetection: true,
     ignore(targetPath) {
-      const dirStat = fs.statSync(targetPath);
-      if (dirStat.isDirectory()) {
-        return false;
+      if (fs.existsSync(targetPath)) {
+        try {
+          const dirStat = fs.statSync(targetPath);
+          if (dirStat.isDirectory()) {
+            return false;
+          }
+          return !targetPath.endsWith(".scss");
+        } catch (exc) {
+          console.warn("ignore files error", exc);
+        }
       }
-      return !targetPath.endsWith(".scss");
+      return true;
     },
   },
   (event, targetPath, targetPathNext) => {
